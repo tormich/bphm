@@ -3,7 +3,7 @@ var https = require('https');
 var router = express.Router();
 
 /* GET apiStatus listing. */
-router.get('/', function (req2, res, next) {
+router.get('/', function (req, res, next) {
     // https://status.github.com/api.json
 
     var options = {
@@ -14,18 +14,20 @@ router.get('/', function (req2, res, next) {
         , headers: {'Content-Type': 'application/json'}
     };
 
-    var request = https.request(options, function (res) {
-        res.setEncoding('utf8');
-        res.on('data', function (data) {
-            console.log(data); // I can't parse it because, it's a string. why?
+    var _req = https.request(options, function(_res) {
+        console.log("statusCode: ", _res.statusCode);
+        console.log("headers: ", _res.headers);
+
+        _res.on('data', function(d) {
+            //process.stdout.write(d);
+            res.end(d);
         });
     });
-    request.on('error', function (e) {
-        console.log('problem with request: ' + e.message);
+    _req.end();
+
+    _req.on('error', function(e) {
+        console.error(e);
     });
-    request.end("s");
-
-
 });
 
 module.exports = router;
