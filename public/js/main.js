@@ -1,10 +1,6 @@
 var app = angular.module("MyApp", []);
 
 var buildMsg = function(date, status, body){
-    var options = {
-        weekday: "long", year: "numeric", month: "numeric",
-        day: "numeric", hour: "2-digit", minute: "2-digit"
-    };
     // 1/1/2013 20:00-22:00: Good: Battlestation fully operational
     r = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
         + " " + date.getHours()

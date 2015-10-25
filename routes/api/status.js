@@ -73,7 +73,6 @@ router.get('/', function (req, res, next) {
                 , (function(){
                     res.end(JSON.stringify({"error": {"message": error}}));
                 }).bind(this));
-            console.log("1");
 
         });
 
@@ -87,14 +86,11 @@ router.get('/', function (req, res, next) {
                 , (function(){
                     res.end(JSON.stringify({"error": {"message": error}}));
                 }).bind(this));
-            console.log("2");
 
         });
+        lastRefresh = new Date().getTime();
     }
-    //pipe.add(updateApiUrls);
-    //pipe.add(getStatu);
-    //pipe.add(getMessages);
-    console.log(lastRefresh);
+
     pl.execute();
 
 
